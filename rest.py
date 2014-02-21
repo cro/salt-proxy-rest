@@ -1,4 +1,4 @@
-#! env python
+#!env python
 #  -*- coding: utf-8
 #
 # rest.py
@@ -8,6 +8,7 @@
 # Requires that the bottle and requests Python packages are available
 
 import argparse
+import os
 from bottle import route, run, template, static_file
 
 PACKAGES = {'coreutils': '1.05'}
@@ -152,11 +153,11 @@ def index():
 @route('/<filename:path>')
 def send_static(filename):
     '''
-    Serve static files out of the 'dist' directory in the same directory that
+    Serve static files out of the same directory that
     rest.py is in.
     '''
     print filename
-    return static_file(filename, root='./')
+    return static_file(filename, root=os.path.dirname('__file__'))
 
 
 def main():
